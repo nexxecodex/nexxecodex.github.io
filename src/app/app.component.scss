@@ -1,0 +1,50 @@
+*{
+    font-family: "Roboto Flex", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: normal;
+  font-style: normal;
+  font-variation-settings:
+    "slnt" 0,
+    "wdth" 100,
+    "GRAD" 0,
+    "XOPQ" 96,
+    "XTRA" 468,
+    "YOPQ" 79,
+    "YTAS" 750,
+    "YTDE" -203,
+    "YTFI" 738,
+    "YTLC" 514,
+    "YTUC" 712;
+}
+.a{
+    font-size:12px;
+}
+
+.list-group{
+    display: flex;
+    gap: 15px;
+    li{
+        margin-bottom:15px;
+        border: 1px solid #ccc;
+        padding: 15px;
+        border-radius: 5px;
+        list-style-type: none;
+        position: relative;
+        p, h2{
+            padding:0;
+            margin:0;
+        }
+        &:hover{
+            background-color: #f9f9f9;
+        }
+        &::before{
+            content: " ";
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 5px;
+            background-color: #007bff;
+        }
+    }
+}

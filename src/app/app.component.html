@@ -1,0 +1,16 @@
+<router-outlet></router-outlet>
+<ul class="list-group">
+  <li *ngFor="let user of users">
+      <h2>{{ user.name }}</h2>
+      <p>{{ user.email }}</p>
+  </li>
+</ul>
+<form [formGroup]="form" (ngSubmit)="submitForm()">
+  <div *ngFor="let field of loginForm">
+    <form-field [formField]="field"></form-field>
+  </div>
+
+  <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+    Submit
+  </button>
+</form>

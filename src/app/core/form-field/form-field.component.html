@@ -1,0 +1,14 @@
+<mat-form-field appearance="outline">
+  <mat-label>{{ formField.label }}</mat-label>
+  <input matInput [type]="formField.type" [placeholder]="formField.placeholder" [formControl]="formField.control">
+
+  <mat-error *ngIf="formField.control.hasError('required')">
+    {{ formField.label }} is required
+  </mat-error>
+  <mat-error *ngIf="formField.control.hasError('email')">
+    Please enter a valid email
+  </mat-error>
+  <mat-error *ngIf="formField.control.hasError('minlength')">
+    Must be at least 3 characters
+  </mat-error>
+</mat-form-field>
