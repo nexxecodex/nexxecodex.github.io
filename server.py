@@ -53,4 +53,9 @@ def add_user():
     return jsonify(new_user),201
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    # app.run(debug=True)
+    # Don't use app.run() in production
+    # Instead, let Gunicorn handle the deployment
+    import os
+    port = int(os.environ.get("PORT", 10000))  # Default to 10000 if PORT is not set
+    app.run(host="0.0.0.0", port=port)
