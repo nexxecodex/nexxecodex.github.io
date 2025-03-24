@@ -52,6 +52,29 @@ def add_user():
     masterData['users'].append(new_user)
     return jsonify(new_user),201
 
+
+@app.route('/api/masterData/users/<int:user_id>', methods=['DELETE'])
+def remove_user(user_id):
+     global masterData
+     users = masterData["users"]
+
+    # Find the user
+     user = next((user for user in users if user["id"] == user_id), None)
+    
+     if user:
+        users.remove(user)
+        return jsonify({"message": "User deleted successfully"}), 200
+     else:
+        return jsonify({"error": "User not found"}), 404
+# Get User by ID
+@app.route('/api/masterData/users/<int:user_id>', methods=['GET'])
+def get_user_by_id(user_id):
+    users = masterData["users"]
+    user = next((user for user in users if user["id"] == user_id), None)
+    if user:
+        return jsonify(user)
+    return jsonify({"error": "User not found"}), 404
+
 if __name__ == '__main__':
     # app.run(debug=True)
     # Don't use app.run() in production

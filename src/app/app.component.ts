@@ -17,7 +17,7 @@ import { formField } from './core/form-field/from-field.model';
 export class AppComponent implements OnInit {
   marsterData: any;
   //users: User[] = []; // Define array for API response
-  users: any;
+  users: any[] = []; // Define array for API response
 
   form = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(3)]),
@@ -77,9 +77,18 @@ export class AppComponent implements OnInit {
       let value = this.form.value;
       const newUser = { name: value.name ?? '', email: value.email ?? '' };
       this.apiService.addUser(newUser).subscribe((response) => {
-        console.log('User added successfully!', response);
-        this.loadeUsers()
-      })
+        this.loadeUsers();
+        this.form.patchValue({ name: '', email: '' });
+        this.form.markAsPristine();
+        this.form.markAsUntouched();
+    })
+    }
+  }
+  deleteUser(userId: number) {
+    if (confirm('Are you sure you want to delete this user?')) {
+      this.apiService.removeUser(userId).subscribe(() => {
+        this.users = this.users.filter(user => user.id !== userId);
+      });
     }
   }
 

@@ -1,6 +1,6 @@
 <mat-form-field appearance="outline">
   <mat-label>{{ formField.label }}</mat-label>
-  <input matInput [type]="formField.type" [placeholder]="formField.placeholder" [formControl]="formField.control">
+  <input matInput [type]="formField.type" class="form-control" [placeholder]="formField.placeholder" [formControl]="formField.control">
 
   <mat-error *ngIf="formField.control.hasError('required')">
     {{ formField.label }} is required

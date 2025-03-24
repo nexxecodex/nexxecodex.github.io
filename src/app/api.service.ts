@@ -13,7 +13,8 @@ interface User {
   providedIn: 'root'
 })
 export class ApiService {
-  private apiUrl = 'http://localhost:5000/api/masterData';
+  private apiUrl = 'https://nexxecodex-github-io.onrender.com/api/masterData';
+  //private apiUrl = 'http://192.168.0.103:10000//api/masterData';
   private dataSubject = new BehaviorSubject<User[]>([]);
 
   constructor(private http: HttpClient) {}
@@ -26,5 +27,8 @@ export class ApiService {
   }
   addUser(users:{name:string, email:string}): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/users`, users);
+  }
+  removeUser(userId:number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/users/${userId}`);
   }
 }
