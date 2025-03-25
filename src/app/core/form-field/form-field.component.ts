@@ -10,7 +10,7 @@ import { formField } from './from-field.model';
   selector: 'form-field',
   imports: [CommonModule, MatFormFieldModule, MatInputModule, MatSelectModule, ReactiveFormsModule],
   templateUrl: './form-field.component.html',
-  styleUrl: './form-field.component.sass'
+  styleUrl: './form-field.component.scss'
 })
 export class FormFieldComponent {
   @Input() formField!: formField;

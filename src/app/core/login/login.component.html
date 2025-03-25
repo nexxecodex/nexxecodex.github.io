@@ -1,0 +1,36 @@
+<p>login works!</p>
+<div class="container-fluid">
+    <div class="login-form">
+      <div class="card auth">
+        <div class="card-body auth-card">
+          <form [formGroup]="form" (ngSubmit)="submitForm()">
+            <div *ngFor="let field of loginForm">
+              <form-field [formField]="field"></form-field>
+            </div>
+            <button class="custom-button" mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+              Submit
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users; let i = index">
+        <td>{{i+1}}</td>
+        <td>{{ user.name }}</td>
+        <td>{{ user.email }}</td>
+        <button (click)="deleteUser(user.id)">Delete</button>
+      </tr>
+    </tbody>
+  </table>

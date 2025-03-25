@@ -4,5 +4,6 @@ export interface formField{
     type: string;
     placeholder: string;
     control: FormControl;
-    validators?: ValidatorFn[]; //Allow validators
+    validators?: ValidatorFn[]; //Allow validators,
+    isVisible?: boolean; //Allow visibility
 }
