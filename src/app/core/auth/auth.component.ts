@@ -18,6 +18,8 @@ export class AuthComponent {
   marsterData: any;
   //users: User[] = []; // Define array for API response
   users: any[] = []; // Define array for API response
+  authText:string = 'Login';
+  isRestPassword = false;
 
   form = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(3)]),
@@ -29,26 +31,29 @@ export class AuthComponent {
       label: 'Name',
       type: 'name',
       placeholder: 'Enter your Name',
-      control: this.form.controls['name']
+      control: this.form.controls['name'],
+      isVisible: true
     },
     {
       label: 'Email',
       type: 'email',
       placeholder: 'Enter your email',
-      control: this.form.controls['email']
+      control: this.form.controls['email'],
+      isVisible: true
     },
     {
       label: 'Password',
       type: 'password',
       placeholder: 'password',
-      control: this.form.controls['password']
+      control: this.form.controls['password'],
+      isVisible: true
     },
     {
       label: 'Confirm Password',
       type: 'password',
       placeholder: 'confirm password',
       control: this.form.controls['password'],
-      isVisible: true
+      isVisible: false
     },
   ]
 
@@ -57,8 +62,19 @@ export class AuthComponent {
   // Toggle between Login & Register
   isLogin = true; 
 
-  toggleForm() {
+  toggleForm(event: Event) {
+    event.preventDefault(); // Prevent navigation
     this.isLogin = !this.isLogin;
+    this.authText = this.isLogin ? 'Login' : 'Register';
+  }
+  forgotPassword(event: Event) {
+    event.preventDefault(); // Prevent navigation
+    this.authForm = this.authForm.map(item => ({
+      ...item,
+      isVisible: item.label === 'Email' // Set isVisible only for the selected item
+    }));
+    this.authText = 'Reset Password';
+    this.isRestPassword = true;
   }
 
   ngOnInit() {

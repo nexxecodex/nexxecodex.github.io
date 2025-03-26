@@ -1,42 +1,24 @@
-<h2>{{ isLogin ? 'Login' : 'Register' }}</h2>
 <div class="container-fluid">
     <div class="login-form">
-      <div class="card auth">
-        <div class="card-body auth-card">
+      <h4>{{ authText}}</h4>
+      <div class="auth">
+        <div class="auth-card">
           <form [formGroup]="form" (ngSubmit)="submitForm()">
-            <div *ngFor="let field of authForm">
-              <form-field *ngIf="!field.isVisible || !isLogin" [formField]="field"></form-field>
+            <div class="form-field" *ngFor="let field of authForm">
+              <form-field *ngIf="field.isVisible || !isLogin" [formField]="field"></form-field>
             </div>
-            <button class="custom-button" mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
-                {{ isLogin ? 'Login' : 'Register' }}
+            <p *ngIf="!isRestPassword" class="password-reset"><a href="#" (click)="forgotPassword($event)">Forgot Password ?</a></p>
+            <button class="btn btn-primary" mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+                {{ authText}}
             </button>
           </form>
         </div>
-        <p>
+        <p *ngIf="!isRestPassword">
             {{ isLogin ? "Don't have an account?" : "Already have an account?" }}
-            <a href="#" (click)="toggleForm()">
+            <a href="#" (click)="toggleForm($event)">
               {{ isLogin ? 'Register' : 'Login' }}
             </a>
           </p>
       </div>
     </div>
   </div>
-  
-  <table>
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let user of users; let i = index">
-        <td>{{i+1}}</td>
-        <td>{{ user.name }}</td>
-        <td>{{ user.email }}</td>
-        <button (click)="deleteUser(user.id)">Delete</button>
-      </tr>
-    </tbody>
-  </table>
