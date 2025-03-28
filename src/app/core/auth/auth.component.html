@@ -1,21 +1,26 @@
 <div class="container-fluid">
     <div class="login-form">
-      <h4>{{ authText}}</h4>
-      <div class="auth">
+     <div class="auth">
+        <h4>{{ authText}}</h4>
+        <!-- <i class="icon icon-small">
+          <svg focusable="false">
+              <use xlink:href="#icon_facebook"></use>
+          </svg>
+        </i> -->
         <div class="auth-card">
           <form [formGroup]="form" (ngSubmit)="submitForm()">
             <div class="form-field" *ngFor="let field of authForm">
               <form-field *ngIf="field.isVisible || !isLogin" [formField]="field"></form-field>
             </div>
-            <p *ngIf="!isRestPassword" class="password-reset"><a href="#" (click)="forgotPassword($event)">Forgot Password ?</a></p>
-            <button class="btn btn-primary" mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+            <p *ngIf="isLogin && authText == 'Login'" class="password-reset"><a href="#" (click)="forgotPassword($event)">Forgot Password ?</a></p>
+            <button class="btn btn-primary" mat-raised-button color="primary" type="submit" [disabled]="form.invalid || form.pristine">
                 {{ authText}}
             </button>
           </form>
         </div>
-        <p *ngIf="!isRestPassword">
+        <p *ngIf="isRestPassword">
             {{ isLogin ? "Don't have an account?" : "Already have an account?" }}
-            <a href="#" (click)="toggleForm($event)">
+            <a href="#" (click)="toggleForm($event, authText)">
               {{ isLogin ? 'Register' : 'Login' }}
             </a>
           </p>

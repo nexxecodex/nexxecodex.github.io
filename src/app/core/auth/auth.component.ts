@@ -15,16 +15,16 @@ import { formField } from '../form-field/from-field.model';
 })
 export class AuthComponent {
 
-  marsterData: any;
+  masterData: any;
   //users: User[] = []; // Define array for API response
   users: any[] = []; // Define array for API response
   authText:string = 'Login';
-  isRestPassword = false;
+  isRestPassword = true;
 
   form = new FormGroup({
-    name: new FormControl('', [Validators.required, Validators.minLength(3)]),
-    email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required, Validators.minLength(6)])
+    name: new FormControl<string | null>('', [Validators.required, Validators.minLength(3)]),
+    email: new FormControl<string | null>('', [Validators.required, Validators.email]),
+    password: new FormControl<string | null>('', [Validators.required, Validators.minLength(6)])
   });
   authForm: formField[] = [
     {
@@ -62,7 +62,7 @@ export class AuthComponent {
   // Toggle between Login & Register
   isLogin = true; 
 
-  toggleForm(event: Event) {
+  toggleForm(event: Event, authText: string) {
     event.preventDefault(); // Prevent navigation
     this.isLogin = !this.isLogin;
     this.authText = this.isLogin ? 'Login' : 'Register';
@@ -74,13 +74,13 @@ export class AuthComponent {
       isVisible: item.label === 'Email' // Set isVisible only for the selected item
     }));
     this.authText = 'Reset Password';
-    this.isRestPassword = true;
+    this.isRestPassword = false;
   }
 
   ngOnInit() {
     this.apiService.getData().subscribe({
       next: (data) => {
-        this.marsterData = data;
+        this.masterData = data;
       },
       error: (error) => console.error('There was an error!', error)
     });
@@ -101,11 +101,16 @@ export class AuthComponent {
       const newUser = { name: value.name ?? '', email: value.email ?? '' };
       this.apiService.addUser(newUser).subscribe((response) => {
         this.loadeUsers();
-        this.form.patchValue({ name: '', email: '' });
-        this.form.markAsPristine();
-        this.form.markAsUntouched();
     })
     }
+     // Clear the form while keeping default values
+    this.form.reset();
+
+    // Clear all validation errors
+    Object.keys(this.form.controls).forEach((key) => {
+      const control = this.form.get(key as keyof typeof this.form.controls);
+      control?.setErrors(null);
+    });
   }
   deleteUser(userId: number) {
     if (confirm('Are you sure you want to delete this user?')) {
