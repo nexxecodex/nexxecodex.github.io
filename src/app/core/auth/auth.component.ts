@@ -2,18 +2,21 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';  // Import RouterModule
 import { FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { ApiService } from '../../api.service';
+import { ApiService } from '../services/api.service';
 import { FormFieldComponent } from '../form-field/form-field.component';
 import { formField } from '../form-field/from-field.model';
+import { MatIconModule } from '@angular/material/icon';
+import { IconService } from '../services/icon.service';
 
 
 @Component({
   selector: 'auth',
-  imports: [CommonModule, RouterModule, ReactiveFormsModule, FormFieldComponent,],  // Include CommonModule
+  imports: [CommonModule, RouterModule, ReactiveFormsModule, FormFieldComponent,MatIconModule],  // Include CommonModule
   templateUrl: './auth.component.html',
   styleUrl: './auth.component.scss'
 })
 export class AuthComponent {
+
 
   masterData: any;
   //users: User[] = []; // Define array for API response
@@ -57,7 +60,7 @@ export class AuthComponent {
     },
   ]
 
-  constructor(private apiService: ApiService) { }
+  constructor(private apiService: ApiService,private iconService: IconService) { }
 
   // Toggle between Login & Register
   isLogin = true; 
@@ -69,12 +72,21 @@ export class AuthComponent {
   }
   forgotPassword(event: Event) {
     event.preventDefault(); // Prevent navigation
+    this.resetErrors();
     this.authForm = this.authForm.map(item => ({
       ...item,
       isVisible: item.label === 'Email' // Set isVisible only for the selected item
     }));
-    this.authText = 'Reset Password';
+    this.authText = 'Reset';
     this.isRestPassword = false;
+  // Remove validation for hidden fields
+  Object.keys(this.form.controls).forEach(field => {
+    const control = this.form.get(field);
+    if (field !== 'email') {
+      control?.clearValidators(); // Remove validation
+      control?.updateValueAndValidity(); // Update validity
+    }
+  });
   }
 
   ngOnInit() {
@@ -95,7 +107,8 @@ export class AuthComponent {
       error: (error) => console.error('There was an error!', error)
     });
   }
-  submitForm() {
+  submitForm(authText: string) {
+   
     if (this.form.valid) {
       let value = this.form.value;
       const newUser = { name: value.name ?? '', email: value.email ?? '' };
@@ -103,7 +116,13 @@ export class AuthComponent {
         this.loadeUsers();
     })
     }
-     // Clear the form while keeping default values
+     this.resetErrors();
+    if (authText === 'Reset') {
+      window.location.reload(); 
+    }
+  }
+  resetErrors(){
+    // Clear the form while keeping default values
     this.form.reset();
 
     // Clear all validation errors

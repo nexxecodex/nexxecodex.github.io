@@ -1,14 +1,12 @@
 <div class="container-fluid">
     <div class="login-form">
      <div class="auth">
+        <div class="logo">
+          <mat-icon svgIcon="{{ authText | lowercase}}"></mat-icon>
+        </div>
         <h4>{{ authText}}</h4>
-        <!-- <i class="icon icon-small">
-          <svg focusable="false">
-              <use xlink:href="#icon_facebook"></use>
-          </svg>
-        </i> -->
         <div class="auth-card">
-          <form [formGroup]="form" (ngSubmit)="submitForm()">
+          <form [formGroup]="form" (ngSubmit)="submitForm(authText)">
             <div class="form-field" *ngFor="let field of authForm">
               <form-field *ngIf="field.isVisible || !isLogin" [formField]="field"></form-field>
             </div>
@@ -27,3 +25,4 @@
       </div>
     </div>
   </div>
+
