@@ -69,6 +69,8 @@ export class AuthComponent {
     event.preventDefault(); // Prevent navigation
     this.isLogin = !this.isLogin;
     this.authText = this.isLogin ? 'Login' : 'Register';
+    this.form.reset();
+    
   }
   forgotPassword(event: Event) {
     event.preventDefault(); // Prevent navigation
