@@ -65,6 +65,3 @@ var svgIcons = `\
 	</defs> 
 </svg>
 `
-$(document).ready(function () {
-	$("body").prepend(svgIcons);
-});
