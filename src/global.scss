@@ -1,0 +1,31 @@
+/* Define global breakpoints */
+$mobile: 576px;
+$tablet: 768px;
+$laptop: 1024px;
+$desktop: 1200px;
+$largeDesktop: 1200px;
+
+/* Create a mixin for reusability */
+@mixin responsive($breakpoint) {
+  @media (max-width: $breakpoint) {
+    @content;
+  }
+}
+
+/* Global styles */
+body {
+  font-size: 18px;
+}
+
+/* Example usage */
+.container {
+  width: 80%;
+
+  @include responsive($tablet) {
+    width: 95%;
+  }
+
+  @include responsive($mobile) {
+    width: 100%;
+  }
+}

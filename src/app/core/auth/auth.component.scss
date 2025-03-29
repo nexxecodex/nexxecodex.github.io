@@ -1,3 +1,4 @@
+
 :host{
   .container-fluid {
     padding:0px;
@@ -10,7 +11,6 @@
       display: flex;
       padding:20px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      width:30%;
       transition: all 0.3s;
       .auth{
         width:100%;
@@ -70,4 +70,51 @@
       gap:10px;
     }
   }
+}
+
+
+/* Extra small devices (phones) */
+@media (max-width: 600px) { 
+  .login-form{
+    width:100%;
+    display: flex;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+}
+
+/* Small devices (tablets) */
+@media (min-width: 600px) { 
+  .login-form{
+      width:100%;
+      display: flex;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+}
+
+/* Small devices (tablets) */
+@media (min-width: 768px) { 
+  .login-form{
+      width:50%;
+  }
+}
+
+/* Medium devices (laptops) */
+@media (min-width: 992px) { 
+  .login-form{
+    width:50%;
+}
+}
+
+/* Large devices (desktops) */
+@media (min-width: 1200px) { 
+  .login-form{
+    width:40%;
+}
+}
+
+/* extra Large devices (desktops) */
+@media (min-width: 1800px) { 
+  .login-form{
+    width:30%;
+} 
 }
