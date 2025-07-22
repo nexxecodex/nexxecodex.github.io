@@ -1,4 +1,11 @@
+<img class="flash-screen" src="assets/images/flashScreen.jpg" alt="flash Screen"/>
 <div class="container-fluid">
+  <div class="select-user-type">
+    <div class="user-type" *ngFor="let type of userTypes" (click)="selectUserType(type)">
+      <mat-icon svgIcon="{{ type.name | lowercase }}"></mat-icon>
+      <span>{{ type.name }}</span>
+    </div>
+  </div>
     <div class="login-form">
      <div class="auth">
         <div class="logo">
