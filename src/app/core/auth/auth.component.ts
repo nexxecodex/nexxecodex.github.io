@@ -24,6 +24,10 @@ export class AuthComponent {
   authText:string = 'Login';
   isRestPassword = true;
 
+  userTypes:any = [
+    { id: 1, name: 'Utilizer', },
+    { id: 2, name: 'Creator' }]
+
   form = new FormGroup({
     name: new FormControl<string | null>('', [Validators.required, Validators.minLength(3)]),
     email: new FormControl<string | null>('', [Validators.required, Validators.email]),
@@ -42,7 +46,7 @@ export class AuthComponent {
       type: 'email',
       placeholder: 'Enter your email',
       control: this.form.controls['email'],
-      isVisible: true
+      isVisible: false
     },
     {
       label: 'Password',
@@ -81,7 +85,7 @@ export class AuthComponent {
     }));
     this.authText = 'Reset';
     this.isRestPassword = false;
-  // Remove validation for hidden fields
+  // Remove validationany for hidden fields
   Object.keys(this.form.controls).forEach(field => {
     const control = this.form.get(field);
     if (field !== 'email') {
@@ -89,6 +93,11 @@ export class AuthComponent {
       control?.updateValueAndValidity(); // Update validity
     }
   });
+  }
+
+  selectUserType(userTypes: any) {  
+    // Handle user type selection if needed
+    console.log(userTypes);
   }
 
   ngOnInit() {
