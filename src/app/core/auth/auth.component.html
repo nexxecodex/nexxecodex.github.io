@@ -1,9 +1,12 @@
 <img class="flash-screen" src="assets/images/flashScreen.jpg" alt="flash Screen"/>
 <div class="container-fluid">
   <div class="select-user-type">
-    <div class="user-type" *ngFor="let type of userTypes" (click)="selectUserType(type)">
-      <mat-icon svgIcon="{{ type.name | lowercase }}"></mat-icon>
-      <span>{{ type.name }}</span>
+    <h3>Select User Type</h3>
+    <div class="user-type">
+      <div class="user-type-label" *ngFor="let type of userTypes; let i = index" (click)="selectUserType(type, i)" [ngClass]="{'selected': type.isSelected}">
+        <mat-icon svgIcon="{{ type.name | lowercase }}"></mat-icon>
+        <span>{{ type.name }}</span>
+      </div>
     </div>
   </div>
     <div class="login-form">

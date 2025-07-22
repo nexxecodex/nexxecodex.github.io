@@ -3,11 +3,40 @@
   .container-fluid {
     padding:0px;
     display: flex;
-      justify-content: center;
-      align-items: flex-end;
-      flex-direction: column;
+    flex-direction: column;
+    background:rgb(0 0 0 / 60%);
+    height: 100vh;
+    justify-content: space-around;
+    align-items: center;
+    .select-user-type {
+      h3{
+        color: #e0fbfc;
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      .user-type{   
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 10px;
+        .user-type-label{
+          border:1px solid #e0fbfc;
+          padding:5px 15px;
+          border-radius: 10px;
+          line-height: 14px;
+          &.selected{
+              background-color: #e0fbfc;
+              color: #293241;
+          }
+          cursor: pointer;
+              display: flex;
+              align-items: center;
+              gap: 10px;
+        }
+      }
+      }
     .login-form{
-      height: 100vh;
+      width:100%;
       display: flex;
       padding:20px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
@@ -57,15 +86,12 @@
         svg{
           width: 60px;
           height: 60px;
-          fill:#ee6c4d;
+          fill:#ffffff;
         }
       }
       }
     }
     .footer{
-      position: absolute;
-      bottom:30px;
-      right:20px;
       display: flex;
       gap:10px;
     }
@@ -97,46 +123,52 @@
 
 /* Extra small devices (phones) */
 @media (max-width: 600px) { 
-  .login-form{
+ :host{
+  .container-fluid {
     width:100%;
     display: flex;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
+}}
 }
 
 /* Small devices (tablets) */
 @media (min-width: 600px) { 
-  .login-form{
+  :host{
+  .container-fluid {
       width:100%;
       display: flex;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  }
+  }}
 }
 
 /* Small devices (tablets) */
 @media (min-width: 768px) { 
-  .login-form{
+  :host{
+  .container-fluid {
       width:50%;
-  }
+  }}
 }
 
 /* Medium devices (laptops) */
 @media (min-width: 992px) { 
-  .login-form{
+  :host{
+  .container-fluid {
     width:50%;
-}
+}}
 }
 
 /* Large devices (desktops) */
 @media (min-width: 1200px) { 
-  .login-form{
+  :host{
+  .container-fluid {
     width:40%;
-}
+}}
 }
 
 /* extra Large devices (desktops) */
 @media (min-width: 1800px) { 
-  .login-form{
+ :host{
+  .container-fluid {
     width:30%;
-} 
+} }
 }

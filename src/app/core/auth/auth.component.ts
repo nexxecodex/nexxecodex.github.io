@@ -25,8 +25,8 @@ export class AuthComponent {
   isRestPassword = true;
 
   userTypes:any = [
-    { id: 1, name: 'Utilizer', },
-    { id: 2, name: 'Creator' }]
+    { id: 1, name: 'Utilizer', isSelected: false },
+    { id: 2, name: 'Creator', isSelected: false },]
 
   form = new FormGroup({
     name: new FormControl<string | null>('', [Validators.required, Validators.minLength(3)]),
@@ -95,9 +95,10 @@ export class AuthComponent {
   });
   }
 
-  selectUserType(userTypes: any) {  
-    // Handle user type selection if needed
-    console.log(userTypes);
+  selectUserType(userTypes: any, index: number) {
+        this.userTypes[index].isSelected = !this.userTypes[index].isSelected;
+        this.userTypes.forEach((btn:any, i:number) => btn.isSelected = i === index);
+        let selectedType = userTypes.name;
   }
 
   ngOnInit() {
